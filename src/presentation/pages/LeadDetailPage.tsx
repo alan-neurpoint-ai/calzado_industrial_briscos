@@ -73,13 +73,16 @@ export const LeadDetailPage = () => {
       <main className="p-6">
         <div className="bg-white rounded-lg shadow-md p-6">
           <div className="flex justify-between items-start mb-4">
-            <h2 className="text-lg font-bold text-stone-800">
-              {lead.nombre_completo}
-            </h2>
             <TranscriptionViewer vapiCallId={lead.vapi_call_id} />
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <h3 className="text-sm text-stone-500">Nombre Completo</h3>
+              <p className="text-lg font-semibold text-stone-800">
+                {lead.nombre_completo}
+              </p>
+            </div>
             <div>
               <h3 className="text-sm text-stone-500">Empresa</h3>
               <p className="text-lg font-semibold text-stone-800">
@@ -90,12 +93,6 @@ export const LeadDetailPage = () => {
               <h3 className="text-sm text-stone-500">Teléfono</h3>
               <p className="text-lg font-semibold text-stone-800">
                 {lead.telefono}
-              </p>
-            </div>
-            <div>
-              <h3 className="text-sm text-stone-500">ID Cliente</h3>
-              <p className="text-lg font-semibold text-stone-800">
-                {lead.id_cliente}
               </p>
             </div>
             <div>
@@ -140,6 +137,30 @@ export const LeadDetailPage = () => {
                 {lead.interes_cliente}
               </p>
             </div>
+            <div>
+              <h3 className="text-sm text-stone-500">Objeción Principal</h3>
+              <p className="text-lg font-semibold text-stone-800">
+                {lead.objeccion_principal}
+              </p>
+            </div>
+            <div>
+              <h3 className="text-sm text-stone-500">Fecha de Creación</h3>
+              <p className="text-lg font-semibold text-stone-800">
+                {new Date(lead.created_at).toLocaleString("es-ES")}
+              </p>
+            </div>
+            <div>
+              <h3 className="text-sm text-stone-500">Fecha Última Compra</h3>
+              <p className="text-lg font-semibold text-stone-800">
+                {lead.fecha_ultima_compra || "Sin datos"}
+              </p>
+            </div>
+            <div>
+              <h3 className="text-sm text-stone-500">Producto Última Compra</h3>
+              <p className="text-lg font-semibold text-stone-800">
+                {lead.producto_ultima_compra || "Sin datos"}
+              </p>
+            </div>
             <div className="md:col-span-2">
               <h3 className="text-sm text-stone-500">
                 Descripción del Interés
@@ -155,21 +176,23 @@ export const LeadDetailPage = () => {
               </p>
             </div>
             <div className="md:col-span-2">
+              <h3 className="text-sm text-stone-500">
+                Descripción Acción de Seguimiento
+              </h3>
+              <p className="text-stone-700">
+                {lead.descripcion_accion_seguimiento || "Sin descripción"}
+              </p>
+            </div>
+            <div className="md:col-span-2">
               <h3 className="text-sm text-stone-500">Resumen de Llamada</h3>
               <p className="text-stone-700">
                 {lead.resumen_llamada || "Sin resumen"}
               </p>
             </div>
-            <div>
-              <h3 className="text-sm text-stone-500">Objeción Principal</h3>
-              <p className="text-lg font-semibold text-stone-800">
-                {lead.objeccion_principal}
-              </p>
-            </div>
-            <div>
-              <h3 className="text-sm text-stone-500">Fecha de Creación</h3>
-              <p className="text-lg font-semibold text-stone-800">
-                {new Date(lead.created_at).toLocaleString("es-ES")}
+            <div className="md:col-span-2">
+              <h3 className="text-sm text-stone-500">Descripción Objeción</h3>
+              <p className="text-stone-700">
+                {lead.descripcion_objeccion_principal || "Sin descripción"}
               </p>
             </div>
           </div>
