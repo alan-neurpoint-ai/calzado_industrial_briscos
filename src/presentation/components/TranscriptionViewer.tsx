@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { FaFileAlt, FaSpinner } from "react-icons/fa";
 import type { TranscriptionData } from "../../domain/entities/Transcription";
+import { transcriptionService } from "../../infrastructure/services/TranscriptionService";
 import { Modal } from "./Modal";
+import { Loading } from "./Loading";
 
 interface TranscriptionViewerProps {
   vapiCallId: string | null;
@@ -25,24 +27,8 @@ export const TranscriptionViewer = ({
     setTranscription(null);
 
     try {
-      const response = await fetch(
-        `https://cesar.n8n-wsk.com/webhook/web_google_drive?call_id=${vapiCallId}`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({}),
-        },
-      );
-
-      if (!response.ok) {
-        throw new Error(`Error: ${response.status} - ${response.statusText}`);
-      }
-
-      const data = await response.json();
-      const transcriptionData = Array.isArray(data) ? data[0] : data;
-      setTranscription(transcriptionData);
+      const data = await transcriptionService.getTranscription(vapiCallId);
+      setTranscription(data);
     } catch (err) {
       setError(
         err instanceof Error ? err.message : "Error al cargar transcripción",
@@ -90,9 +76,7 @@ export const TranscriptionViewer = ({
             </button>
           </div>
         ) : loading ? (
-          <div className="flex items-center justify-center py-8">
-            <FaSpinner className="animate-spin text-2xl text-orange-500" />
-          </div>
+          <Loading message="Cargando transcripción..." size="md" />
         ) : transcription?.texto?.transcripcion_limpia ? (
           <div className="bg-stone-50 p-6 rounded-lg text-stone-700 whitespace-pre-wrap leading-relaxed">
             {transcription.texto.transcripcion_limpia}

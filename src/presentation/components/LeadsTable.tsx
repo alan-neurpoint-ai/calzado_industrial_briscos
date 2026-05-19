@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router";
-import { FaChevronLeft, FaChevronRight, FaSync } from "react-icons/fa";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import type { Lead } from "../../domain/entities/Lead";
+import { Loading } from "./Loading";
 
 interface LeadsTableProps {
   leads: Lead[];
@@ -50,9 +51,8 @@ export const LeadsTable = ({
           <tbody>
             {loading ? (
               <tr>
-                <td colSpan={6} className="text-center py-8 text-stone-500">
-                  <FaSync className="animate-spin mx-auto mb-2" />
-                  Cargando...
+                <td colSpan={6}>
+                  <Loading message="Cargando leads..." size="sm" />
                 </td>
               </tr>
             ) : currentData.length === 0 ? (

@@ -4,6 +4,7 @@ import { supabase } from "../../infrastructure/adapters/supabaseClient";
 import type { Lead } from "../../domain/entities/Lead";
 import { FaArrowLeft } from "react-icons/fa";
 import { TranscriptionViewer } from "../components/TranscriptionViewer";
+import { LoadingPage } from "../components/Loading";
 
 export const LeadDetailPage = () => {
   const { id } = useParams<{ id: string }>();
@@ -38,11 +39,7 @@ export const LeadDetailPage = () => {
   }, [id]);
 
   if (loading) {
-    return (
-      <div className="min-h-screen bg-stone-50 flex items-center justify-center">
-        <p className="text-stone-600">Cargando...</p>
-      </div>
-    );
+    return <LoadingPage />;
   }
 
   if (error) {
