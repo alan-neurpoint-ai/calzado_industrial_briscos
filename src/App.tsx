@@ -1,3 +1,5 @@
+import { DashboardPage } from "./presentation/pages/DashboardPage";
+
 export default function App() {
-  return <div></div>;
+  return <DashboardPage />;
 }
